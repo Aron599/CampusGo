@@ -1,1 +1,1 @@
-print("Programozás")
+print("Programozas")

@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>1c083e4e-b807-4d23-9af0-eac0cb69cd0f</ProjectGuid>
+    <ProjectGuid>63441ee7-321f-451f-9c7c-6a04daaff23d</ProjectGuid>
     <ProjectHome>.</ProjectHome>
     <StartupFile>CampusGo.py</StartupFile>
     <SearchPath>

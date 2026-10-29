@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.37827.9 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "CampusGo", "CampusGo\CampusGo.pyproj", "{1C083E4E-B807-4D23-9AF0-EAC0CB69CD0F}"
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "CampusGo", "..\CampusGo.\CampusGo.\CampusGo.pyproj", "{63441EE7-321F-451F-9C7C-6A04DAAFF23D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,13 +11,13 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1C083E4E-B807-4D23-9AF0-EAC0CB69CD0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1C083E4E-B807-4D23-9AF0-EAC0CB69CD0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63441EE7-321F-451F-9C7C-6A04DAAFF23D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63441EE7-321F-451F-9C7C-6A04DAAFF23D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {DF8AA3AB-C61F-4356-8219-5CEA7AB1DAC2}
+		SolutionGuid = {13839514-E694-4FAA-8A6E-83E6C86A20CA}
 	EndGlobalSection
 EndGlobal
