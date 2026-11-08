@@ -53,3 +53,4 @@ def login(login_data: UserLogin, db: Session = Depends(get_db)):
 @router.get("/me", response_model=UserOut)
 def get_profile(current_user: models.User = Depends(get_current_user)):
     return current_user
+6
