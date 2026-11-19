@@ -3,6 +3,34 @@ from typing import Optional, Dict, Any
 from pydantic import BaseModel, EmailStr
 from app.db.models import Role, QuestType
 
+class ShopItemOut(BaseModel):
+    id: int
+    name: str
+    description: Optional[str] = None
+    price: int
+    stock: Optional[int] = None
+    is_active: bool
+
+    class Config:
+        from_attributes = True
+
+
+class PurchaseOut(BaseModel):
+    id: str
+    item_id: int
+    item_name: str
+    price_paid: int
+    coupon_code: str
+    purchased_at: datetime
+
+
+class BuyItemResponse(BaseModel):
+    message: str
+    item_name: str
+    price_paid: int
+    remaining_coins: int
+    coupon_code: str
+
 class UserRegister(BaseModel):
     neptun_code: str
     email: EmailStr

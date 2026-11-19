@@ -1,7 +1,7 @@
 import uuid
 from datetime import datetime
 import enum
-from sqlalchemy import Column, String, Integer, DateTime, ForeignKey, Enum, UniqueConstraint
+from sqlalchemy import Column, String, Integer, DateTime, ForeignKey, Enum, UniqueConstraint, Boolean
 from sqlalchemy.orm import relationship
 from app.db.database import Base
 
@@ -31,6 +31,33 @@ class User(Base):
     created_at = Column(DateTime, default=datetime.utcnow)
 
     completed_quests = relationship("UserQuest", back_populates="user")
+
+    purchases = relationship("UserPurchase", back_populates="user")
+
+class ShopItem(Base):
+    __tablename__ = "shop_items"
+
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    name = Column(String, unique=True, nullable=False)
+    description = Column(String, nullable=True)
+    price = Column(Integer, nullable=False)
+    stock = Column(Integer, nullable=True)  # None = korlatlan keszlet
+    is_active = Column(Boolean, default=True)
+
+    purchases = relationship("UserPurchase", back_populates="item")
+
+class UserPurchase(Base):
+    __tablename__ = "user_purchases"
+
+    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
+    user_id = Column(String, ForeignKey("users.id"), nullable=False)
+    item_id = Column(Integer, ForeignKey("shop_items.id"), nullable=False)
+    price_paid = Column(Integer, nullable=False)
+    coupon_code = Column(String, unique=True, nullable=False)
+    purchased_at = Column(DateTime, default=datetime.utcnow)
+
+    user = relationship("User", back_populates="purchases")
+    item = relationship("ShopItem", back_populates="purchases")
 
 class Quest(Base):
     __tablename__ = "quests"
