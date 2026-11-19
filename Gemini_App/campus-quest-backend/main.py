@@ -1,9 +1,11 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.db.database import engine, Base
-from app.routers import auth, quests
+from app.routers import auth, quests, qr
 
 Base.metadata.create_all(bind=engine)
+
+
 
 app = FastAPI(
     title="CampusQuest API",
@@ -21,6 +23,7 @@ app.add_middleware(
 
 app.include_router(auth.router)
 app.include_router(quests.router)
+app.include_router(qr.router)
 
 @app.get("/health", tags=["System"])
 def health_check():
