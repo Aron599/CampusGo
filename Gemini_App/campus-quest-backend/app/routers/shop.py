@@ -74,6 +74,7 @@ def buy_item(
         price_paid=item.price,
         remaining_coins=current_user.coins,
         coupon_code=coupon_code,
+
     )
 
 
