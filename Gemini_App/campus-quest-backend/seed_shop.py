@@ -12,13 +12,13 @@ def seed_shop_items():
                 name="Kave",
                 description="Egy friss eszpresszo vagy cappuccino az egyetemi bufeben.",
                 price=50,
-                stock=10,
+                stock=100,
             ),
             ShopItem(
                 name="Suti",
                 description="Egy szabadon valasztott friss sutemeny.",
                 price=30,
-                stock=20,
+                stock=200,
             ),
         ]
 
