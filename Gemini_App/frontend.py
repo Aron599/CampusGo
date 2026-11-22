@@ -12,7 +12,7 @@ st.set_page_config(
 # Kompakt mobilbarát CSS finomhangolás
 st.markdown("""
     <style>
-        .block-container { padding-top: 1.5rem; padding-bottom: 3rem; max-width: 480px; }
+        .block-container { padding-top: 3rem; padding-bottom: 3rem; max-width: 480px; }
         div[data-testid="stMetricValue"] { font-size: 1.4rem; }
         .stButton > button { width: 100%; border-radius: 12px; font-weight: 600; }
     </style>
@@ -25,6 +25,8 @@ if "user" not in st.session_state:
     st.session_state.user = None
 if "api_url" not in st.session_state:
     st.session_state.api_url = "http://127.0.0.1:8000"
+if "avatar_emoji" not in st.session_state:
+    st.session_state.avatar_emoji = "🎓"
 
 
 def api_request(method: str, endpoint: str, json_data=None, files=None, params=None):
@@ -123,7 +125,7 @@ user = st.session_state.user
 # Fejléc és kilépés gomb
 col_title, col_logout = st.columns([3, 1])
 with col_title:
-    st.subheader(f"👋 {user['name']}")
+    st.subheader(f"{st.session_state.avatar_emoji} {user['name']}")
     st.caption(f"Neptun: **{user['neptun_code']}**")
 with col_logout:
     if st.button("Kilépés"):
@@ -131,11 +133,41 @@ with col_logout:
         st.session_state.user = None
         st.rerun()
 
+# Emoji választó a névhez
+with st.expander("🎭 Avatár emoji módosítása"):
+    emoji_options = [
+        # Alapikon
+        "🎓",
+        # 10 női karakter
+        "👩", "👩‍🎓", "👩‍💻", "👩‍🔬", "👩‍🎨", "👩‍🚀", "🦸‍♀️", "🧙‍♀️", "🧝‍♀️", "👸",
+        # 10 férfi karakter
+        "👨", "👨‍🎓", "👨‍💻", "👨‍🔬", "👨‍🎨", "👨‍🚀", "🦸‍♂️", "🧙‍♂️", "🧝‍♂️", "🤴",
+        # 10 állat
+        "🦊", "🐼", "🦁", "🦉", "🐱", "🐶", "🐨", "🐯", "🐸", "🦄"
+    ]
+    selected = st.selectbox(
+        "Válassz ikont a neved mellé:",
+        options=emoji_options,
+        index=emoji_options.index(st.session_state.avatar_emoji),
+        label_visibility="collapsed"
+    )
+    if selected != st.session_state.avatar_emoji:
+        st.session_state.avatar_emoji = selected
+        st.rerun()
+
 # Státusz kártyák (Szint, XP, Coin)
 c1, c2, c3 = st.columns(3)
-c1.metric("Szint", user["level"])
-c2.metric("XP", user["xp"])
-c3.metric("Coin", f"{user['coins']} 🪙")
+c1.metric("Szint", f"{user['level']} 🚀")
+c2.metric("XP", f"{user['xp']} ⚡")
+c3.metric("Coin", f"{user['coins']} ⭐")
+
+# XP haladásjelző sáv a következő szintig (200 XP / szint)
+xp_in_current_level = user["xp"] % 200
+xp_needed = 200 - xp_in_current_level
+st.progress(
+    xp_in_current_level / 200,
+    text=f"Következő szint ({user['level'] + 1}. szint): **{xp_in_current_level} / 200 XP** (még {xp_needed} XP)"
+)
 
 st.divider()
 
